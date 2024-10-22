@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Arial', sans-serif;
+        }
+
+        body {
+            background-color: #000;
+            color: white;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            flex-direction: column;
+        }
+
+        .container {
+            background: #111;
+            padding: 40px;
+            border-radius: 10px;
+            max-width: 400px;
+            width: 100%;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            font-size: 32px;
+            margin-bottom: 30px;
+            color: #fff;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            margin-bottom: 20px;
+            outline: none;
+        }
+
+        input::placeholder {
+            color: #888;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        button:hover {
+            background: #444;
+        }
+
+        .weather-info {
+            margin-top: 30px;
+            font-size: 18px;
+        }
+
+        .weather-info img {
+            width: 50px;
+            margin-bottom: 10px;
+        }
+
+        .weather-info p {
+            margin: 5px 0;
+        }
+
+        .weather-description {
+            font-style: italic;
+            color: #bbb;
+        }
+
+        .temperature {
+            font-size: 24px;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .date {
+            margin-top: 10px;
+            color: #aaa;
+            font-size: 14px;
+        }
+        .weather-icon {
+            width: 100px; /* Adjust size as needed */
+            filter: invert(100%) brightness(150%);
+        }
+        
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Weather App</h1>
+        <form method="POST">
+            {% csrf_token %}
+            <!-- The action should point to the server-side route that processes the form -->
+            <input type="text" name="city" placeholder="Enter city name" required />
+            <button type="submit">Get Weather</button>
+        </form>
+
+        <div class="weather-info">
+            <!-- Weather data placeholders (to be filled on the server-side and rendered) -->
+            {% if icon %}
+            <img id="weather-icon" src="https://openweathermap.org/img/wn/{{ icon }}@2x.png" alt="Weather Icon">
+            {% endif %}
+            {% if description %}
+                <p class="weatherdescription">{{ description }}</p>
+            {% endif %}
+            {% if temp %}
+                <p class="temperature">{{ temp }}°C</p>
+            {% endif %}
+            {% if day %}
+                <p class="date">{{ day }}</p>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>

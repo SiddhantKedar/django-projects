@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background: #000;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+        }
+
+        .todo-box {
+            background: #111;
+            padding: 40px;
+            border-radius: 10px;
+            width: 100%;
+            max-width: 400px;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+            margin-bottom: 30px;
+            color: #fff;
+            font-size: 24px;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            background: #222;
+            border: none;
+            border-radius: 5px;
+            color: white;
+            font-size: 16px;
+            outline: none;
+        }
+
+        input:focus {
+            box-shadow: 0 0 5px rgba(255, 255, 255, 0.3);
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background: #333;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        button:hover {
+            background: #444;
+        }
+
+        ul {
+            list-style: none;
+            margin-top: 20px;
+        }
+
+        li {
+            background: #222;
+            padding: 12px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .delete-btn {
+            background: #ff4444;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            color: white;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s;
+        }
+
+        .delete-btn:hover {
+            background: #ff5555;
+        }
+    </style>
+</head>
+<body>
+    <div class="todo-box">
+        <h1>To-Do List</h1>
+        
+        <form id="todo-form" method="POST">
+            {% csrf_token %}
+            <div class="input-group">
+                <input type="text" id="todo-input" placeholder="Add a new task" name = 'title' required>
+            </div>
+            <button type="submit">Add Task</button>
+        </form>
+        
+        <!-- To-do items will appear here -->
+        <ul id="todo-list">
+            {% for todo in res %} 
+            <li> {{todo.title}}</li>
+            {% endfor %}
+        </ul>
+        
+        {% comment %} {% for todo in res%}
+        <div class = "Todo">
+        <h5> {{todo.srno}} </h5>
+        <p> {{todo.title}} </p>
+        <div>
+            <a href=""> </a>
+            <a href=""> </a>
+        </div>
+        {%endfor%} {% endcomment %}
+    
+    </div>
+
+</body>
+</html>
